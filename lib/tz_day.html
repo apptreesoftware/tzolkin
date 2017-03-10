@@ -1,0 +1,21 @@
+<dom-module id="tz-day">
+    <style>
+        :host {
+            --background-color: white;
+            background-color: var(--background-color);
+            cursor: pointer;
+        }
+
+        :host:focus {
+            outline: none;
+        }
+
+        .label {
+            padding-bottom: 30px;
+        }
+
+    </style>
+    <template>
+        <div class="label" on-tap="handleTap">[[_dateLabel]]</div>
+    </template>
+</dom-module>

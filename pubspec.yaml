@@ -1,0 +1,25 @@
+name: tzolkin
+description: A simple Polymer calendar component written in
+version: 1.0.0
+author: John Ryan <john.p.ryan4@gmail.com>
+homepage: https://github.com/johnpryan/tzolkin
+
+environment:
+  sdk: '>=1.0.0 <2.0.0'
+
+dependencies:
+  polymer: ^1.0.0-rc.17
+  polymer_elements:
+    git:
+      url: https://github.com/dart-lang/polymer_elements
+      ref: master
+  browser: ^0.10.0+2
+  intl: ^0.14.0
+
+dev_dependencies:
+  test: '>=0.12.0 <0.13.0'
+
+transformers:
+- polymer:
+    entry_points:
+      - example/index.html
