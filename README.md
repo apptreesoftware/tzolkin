@@ -2,6 +2,8 @@
 
 A simple calendar element.
 
+[pub.dartlang.org/packages/tzolkin](https://pub.dartlang.org/packages/tzolkin)
+
 ![screenshot](doc/tzolkin.gif)
 
 ## Usage
