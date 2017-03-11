@@ -4,7 +4,7 @@ A simple calendar element.
 
 [pub.dartlang.org/packages/tzolkin](https://pub.dartlang.org/packages/tzolkin)
 
-![screenshot](https://raw.githubusercontent.com/johnpryan/tzolkin/doc/tzolkin.gif)
+![screenshot](https://raw.githubusercontent.com/johnpryan/tzolkin/master/doc/tzolkin.gif)
 
 ## Usage
 
