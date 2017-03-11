@@ -1,19 +1,15 @@
-# tzolkin2
+# tzolkin
 
-A library for Dart developers. It is awesome.
+A simple calendar element.
+
+![screenshot](doc/tzolkin.gif)
 
 ## Usage
 
-A simple usage example:
-
-    import 'package:tzolkin2/tzolkin2.dart';
-
-    main() {
-      var awesome = new Awesome();
-    }
+See the `example/` folder.
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: http://github.com/johnpryan/tzolkin
