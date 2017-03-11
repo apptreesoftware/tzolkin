@@ -5,14 +5,11 @@ author: John Ryan <john.p.ryan4@gmail.com>
 homepage: https://github.com/johnpryan/tzolkin
 
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: ">=1.8.0 <2.0.0"
 
 dependencies:
   polymer: ^1.0.0-rc.17
-  polymer_elements:
-    git:
-      url: https://github.com/dart-lang/polymer_elements
-      ref: master
+  polymer_elements: ^1.0.0-rc.9
   browser: ^0.10.0+2
   intl: ^0.14.0
 
