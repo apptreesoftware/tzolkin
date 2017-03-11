@@ -51,15 +51,31 @@ class TzCalendar extends PolymerElement {
   DateTime _currentWeek;
   DataSource _dataSource;
 
+  @property
+  String expandIcon;
+
+  @Property()
+  String _selectedDateLabel;
+
+  String get selectedDateLabel => get('_selectedDateLabel');
+  void set selectedDateLabel(String t) {
+    set('_selectedDateLabel', t);
+  }
+
   DateTime _selectedDate;
+
 
   factory TzCalendar() => new TzCalendar._internal();
   factory TzCalendar._internal() => new Element.tag(TzCalendar.tag);
   TzCalendar.created() : super.created();
 
+  DateTime get selectedDate => _selectedDate;
+
   void setSelectedDate(DateTime date) {
     _selectedDate = date;
     _currentWeek = _selectedDate;
+    fire('day-selected', detail: Utils.apiDayFormat(date));
+    selectedDateLabel = Utils.fullDayFormat(date);
   }
 
   void displayWeek(DateTime week, [DataSource source]) {
@@ -72,6 +88,7 @@ class TzCalendar extends PolymerElement {
     title = Utils.formatMonth(_currentWeek);
     weekdays = Utils.weekdays;
     days = _daysForMonth(_currentWeek, _dataSource);
+    set('expandIcon', _expandIconValue());
   }
 
   List<List<DayProxy>> _daysForMonth(month, DataSource source) {
@@ -85,7 +102,8 @@ class TzCalendar extends PolymerElement {
         continue;
       }
 
-      var proxy = new DayProxy(day, source?.progressForDay(day), Utils.isSameDay(_selectedDate, day));
+      var proxy = new DayProxy(day, source?.progressForDay(day) ?? -1,
+          Utils.isSameDay(_selectedDate, day));
       week.add(proxy);
       if (week.length >= 7) {
         result.add(week);
@@ -111,16 +129,24 @@ class TzCalendar extends PolymerElement {
     return false;
   }
 
+  String _expandIconValue() {
+    if (hideOtherWeeks) {
+      return 'icons:expand-more';
+    } else {
+      return 'icons:expand-less';
+    }
+  }
+
   @reflectable
   void handleDayTapped(CustomEvent e, DayProxy d) {
-    _selectedDate = d.date;
-    _currentWeek = _selectedDate;
+    setSelectedDate(d.date);
     _render();
   }
 
   @reflectable
   void handleToggleWeek(e, d) {
     set('hideOtherWeeks', !hideOtherWeeks);
+    set('expandIcon', _expandIconValue());
     _render();
   }
 
@@ -136,7 +162,7 @@ class TzCalendar extends PolymerElement {
 
   @reflectable
   void handleNext(e, d) {
-    if(hideOtherWeeks) {
+    if (hideOtherWeeks) {
       _currentWeek = Utils.nextWeek(_currentWeek);
     } else {
       _currentWeek = Utils.nextMonth(_currentWeek);

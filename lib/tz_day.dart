@@ -10,6 +10,9 @@ import 'package:web_components/web_components.dart' show HtmlImport;
 //ignore: unused_import
 import 'package:polymer_elements/color.dart';
 
+//ignore: unused_import
+import 'package:polymer_elements/paper_progress.dart';
+
 @PolymerRegister(TzDay.tag)
 class TzDay extends PolymerElement {
   static const String tag = 'tz-day';
@@ -23,6 +26,22 @@ class TzDay extends PolymerElement {
   String get dateLabel => get('_dateLabel');
   void set dateLabel(String t) {
     set('_dateLabel', t);
+  }
+
+  @Property()
+  bool _hasProgress;
+
+  bool get hasProgress => get('_hasProgress');
+  void set hasProgress(bool t) {
+    set('_hasProgress', t);
+  }
+
+  @Property()
+  int _progress;
+
+  int get progress => get('_progress');
+  void set progress(int t) {
+    set('_progress', t);
   }
 
   factory TzDay() => new TzDay._internal();
@@ -40,6 +59,13 @@ class TzDay extends PolymerElement {
       dateLabel = Utils.formatFirstDay(this.day.date);
     } else {
       dateLabel = Utils.formatDay(this.day.date);
+    }
+
+    if (v.progress >= 0) {
+      hasProgress = true;
+      progress = v.progress;
+    } else {
+      hasProgress = false;
     }
 
     renderSelected(v.selected);

@@ -1,9 +1,9 @@
 <dom-module id="tz-calendar">
     <style>
         :host {
+            --tz-primary-color: var(--paper-amber-500);
             --border-color: #d6d6d6;
             --tz-calendar-font: Arial, sans-serif;
-
         }
 
         * {
@@ -46,6 +46,16 @@
             border-left: 1px solid var(--border-color);
         }
 
+        .footer {
+            @apply(--layout-horizontal);
+            @apply(--layout-justified);
+            @apply(--layout-center);
+        }
+
+        .full-date {
+            color: var(--paper-grey-400);
+        }
+
     </style>
     <template>
         <div class="title">
@@ -68,6 +78,9 @@
                 </div>
             </template>
         </div>
-        <button on-tap="handleToggleWeek">expand / collapse</button>
+        <div class="footer">
+            <div class="full-date">[[_selectedDateLabel]]</div>
+            <paper-icon-button icon="[[expandIcon]]" on-tap="handleToggleWeek"></paper-icon-button>
+        </div>
     </template>
 </dom-module>

@@ -14,5 +14,18 @@ Future<Null> main() async {
   calendar.set('hideOtherWeeks', true);
   var date = new DateTime(2017, 3, 10);
   calendar.setSelectedDate(date);
-  calendar.displayWeek(date);
+  calendar.displayWeek(date, new MockDataSource());
+  calendar.on['day-selected'].listen((Event e) {
+    print("Selected Day: ${calendar.selectedDate}");
+  });
+}
+
+class MockDataSource implements DataSource {
+
+  int progressForDay(DateTime day) {
+    if (day.weekday == 2) {
+      return 40;
+    }
+    return -1;
+  }
 }

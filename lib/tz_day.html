@@ -1,6 +1,7 @@
 <dom-module id="tz-day">
     <style>
         :host {
+            --progress-color: var(--tz-primary-color);
             --background-color: white;
             background-color: var(--background-color);
             cursor: pointer;
@@ -11,11 +12,19 @@
         }
 
         .label {
+            padding-top: 3px;
+            padding-left: 3px;
             padding-bottom: 30px;
         }
-
+        paper-progress {
+            width: 100%;
+            --paper-progress-active-color: var(--progress-color);
+        }
     </style>
     <template>
         <div class="label" on-tap="handleTap">[[_dateLabel]]</div>
+        <template is="dom-if" if="[[_hasProgress]]">
+            <paper-progress value="[[_progress]]"></paper-progress>
+        </template>
     </template>
 </dom-module>

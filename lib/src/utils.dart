@@ -6,10 +6,14 @@ class Utils {
   static final DateFormat _monthFormat = new DateFormat("MMMM yyyy");
   static final DateFormat _dayFormat = new DateFormat("dd");
   static final DateFormat _firstDayFormat = new DateFormat("MMM dd");
+  static final DateFormat _fullDayFormat = new DateFormat("EEE MMM dd, yyyy");
+  static final DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
 
   static String formatMonth(DateTime d) => _monthFormat.format(d);
   static String formatDay(DateTime d) => _dayFormat.format(d);
   static String formatFirstDay(DateTime d) => _firstDayFormat.format(d);
+  static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
+  static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
   static const List<String> weekdays = const [
     "Sun",
