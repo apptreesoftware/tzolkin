@@ -20,24 +20,15 @@ class TzDay extends PolymerElement {
   @Property(observer: "handleDayChanged")
   DayProxy day;
 
-  @Property()
-  String _dateLabel;
-
   String get dateLabel => get('_dateLabel');
   void set dateLabel(String t) {
     set('_dateLabel', t);
   }
 
-  @Property()
-  bool _hasProgress;
-
   bool get hasProgress => get('_hasProgress');
   void set hasProgress(bool t) {
     set('_hasProgress', t);
   }
-
-  @Property()
-  int _progress;
 
   int get progress => get('_progress');
   void set progress(int t) {

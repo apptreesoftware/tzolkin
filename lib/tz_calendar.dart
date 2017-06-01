@@ -21,24 +21,15 @@ import "package:polymer_elements/iron_icons.dart";
 class TzCalendar extends PolymerElement {
   static const String tag = 'tz-calendar';
 
-  @Property()
-  String _title;
-
   String get title => get('_title');
   void set title(String t) {
     set('_title', t);
   }
 
-  @Property()
-  List<String> _weekdays;
-
   List<String> get weekdays => get('_weekdays');
   void set weekdays(List<String> t) {
     set('_weekdays', t);
   }
-
-  @Property()
-  List<List<DayProxy>> _days;
 
   List<List<DayProxy>> get days => get('_days');
   void set days(List<List<DayProxy>> t) {
@@ -53,9 +44,6 @@ class TzCalendar extends PolymerElement {
 
   @property
   String expandIcon;
-
-  @Property()
-  String _selectedDateLabel;
 
   String get selectedDateLabel => get('_selectedDateLabel');
   void set selectedDateLabel(String t) {
