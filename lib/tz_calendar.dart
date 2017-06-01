@@ -64,7 +64,6 @@ class TzCalendar extends PolymerElement {
 
   DateTime _selectedDate;
 
-
   factory TzCalendar() => new TzCalendar._internal();
   factory TzCalendar._internal() => new Element.tag(TzCalendar.tag);
   TzCalendar.created() : super.created();
@@ -102,8 +101,9 @@ class TzCalendar extends PolymerElement {
         continue;
       }
 
-      var proxy = new DayProxy(day, source?.progressForDay(day) ?? -1,
-          Utils.isSameDay(_selectedDate, day));
+      var config = source?.configurationForDay(day);
+      var proxy = new DayProxy(day, config?.progress ?? -1,
+          Utils.isSameDay(_selectedDate, day), config?.color, config?.dotColor);
       week.add(proxy);
       if (week.length >= 7) {
         result.add(week);
@@ -172,5 +172,12 @@ class TzCalendar extends PolymerElement {
 }
 
 abstract class DataSource {
-  int progressForDay(DateTime day);
+  DateConfiguration configurationForDay(DateTime day);
+}
+
+class DateConfiguration {
+  final int progress;
+  final String color;
+  final String dotColor;
+  DateConfiguration(this.progress, this.color, this.dotColor);
 }

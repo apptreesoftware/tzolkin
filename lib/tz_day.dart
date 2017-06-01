@@ -68,7 +68,22 @@ class TzDay extends PolymerElement {
       hasProgress = false;
     }
 
+    renderColors(v);
     renderSelected(v.selected);
+  }
+
+  renderColors(DayProxy day) {
+    if (day.color != null) {
+      customStyle['--tz-progress-color'] = day.color;
+    } else {
+      customStyle['--tz-progress-color'] = 'var(--tz-primary-color)';
+    }
+    if (day.dotColor != null) {
+      customStyle['--tz-dot-color'] = day.dotColor;
+    } else {
+      customStyle['--tz-dot-color'] = 'rgba(0, 0, 0, 0.0)';
+    }
+    updateStyles();
   }
 
   renderSelected(bool b) {
@@ -81,7 +96,6 @@ class TzDay extends PolymerElement {
   }
 }
 
-
 class DayProxy extends JsProxy {
   @reflectable
   final DateTime date;
@@ -93,5 +107,11 @@ class DayProxy extends JsProxy {
   final bool selected;
 
   @reflectable
-  DayProxy(this.date, this.progress, this.selected);
+  final String color;
+
+  @reflectable
+  final String dotColor;
+
+  @reflectable
+  DayProxy(this.date, this.progress, this.selected, this.color, this.dotColor);
 }

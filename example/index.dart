@@ -22,11 +22,16 @@ Future<Null> main() async {
 }
 
 class MockDataSource implements DataSource {
-
-  int progressForDay(DateTime day) {
-    if (day.weekday == 2) {
-      return 40;
+  @override
+  DateConfiguration configurationForDay(DateTime day) {
+    if (day.day == 1) {
+      return new DateConfiguration(40, "blue", "red");
     }
-    return -1;
+
+    if (day.day == 2) {
+      return new DateConfiguration(40, null, "green");
+    }
+
+    return new DateConfiguration(-1, null, null);
   }
 }
