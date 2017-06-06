@@ -1,9 +1,11 @@
 @HtmlImport('tz_calendar.html')
 library at_calendar;
 
+import 'dart:async';
 import 'dart:html';
 
 import 'package:polymer/polymer.dart';
+import 'package:tzolkin/date_range.dart';
 import 'package:tzolkin/src/utils.dart';
 import 'package:tzolkin/tz_day.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
@@ -20,6 +22,12 @@ import "package:polymer_elements/iron_icons.dart";
 @PolymerRegister(TzCalendar.tag)
 class TzCalendar extends PolymerElement {
   static const String tag = 'tz-calendar';
+
+  DateRange _dateRange;
+  StreamController<DateRange> _dateRangeSink = new StreamController.broadcast();
+
+  DateRange get dateRange => _dateRange;
+  Stream<DateRange> get onDateRangeChanged => _dateRangeSink.stream;
 
   String get title => get('_title');
   void set title(String t) {
@@ -68,10 +76,10 @@ class TzCalendar extends PolymerElement {
   void displayWeek(DateTime week, [DataSource source]) {
     _currentWeek = week;
     _dataSource = source;
-    _render();
+    render();
   }
 
-  void _render() {
+  void render() {
     title = Utils.formatMonth(_currentWeek);
     weekdays = Utils.weekdays;
     days = _daysForMonth(_currentWeek, _dataSource);
@@ -128,14 +136,16 @@ class TzCalendar extends PolymerElement {
   @reflectable
   void handleDayTapped(CustomEvent e, DayProxy d) {
     setSelectedDate(d.date);
-    _render();
+    render();
   }
 
   @reflectable
   void handleToggleWeek(e, d) {
     set('hideOtherWeeks', !hideOtherWeeks);
     set('expandIcon', _expandIconValue());
-    _render();
+
+    emitRangeEvent();
+    render();
   }
 
   @reflectable
@@ -145,7 +155,9 @@ class TzCalendar extends PolymerElement {
     } else {
       _currentWeek = Utils.previousMonth(_currentWeek);
     }
-    _render();
+
+    emitRangeEvent();
+    render();
   }
 
   @reflectable
@@ -155,7 +167,21 @@ class TzCalendar extends PolymerElement {
     } else {
       _currentWeek = Utils.nextMonth(_currentWeek);
     }
-    _render();
+
+    emitRangeEvent();
+    render();
+  }
+
+  void emitRangeEvent() {
+    if (hideOtherWeeks) {
+      _dateRange = new DateRange(Utils.firstDayOfWeek(_currentWeek),
+          Utils.lastDayOfWeek(_currentWeek));
+      _dateRangeSink.add(dateRange);
+    } else {
+      _dateRange = new DateRange(Utils.firstDayOfMonth(_currentWeek),
+          Utils.lastDayOfMonth(_currentWeek));
+      _dateRangeSink.add(_dateRange);
+    }
   }
 }
 

@@ -36,7 +36,8 @@ void main() {
           Utils.isSameWeek(new DateTime(2017, 3, 3), new DateTime(2017, 3, 10)),
           false);
       expect(
-          Utils.isSameWeek(new DateTime(2017, 3, 10), new DateTime(2017, 3, 10)),
+          Utils.isSameWeek(
+              new DateTime(2017, 3, 10), new DateTime(2017, 3, 10)),
           true);
     });
   });
