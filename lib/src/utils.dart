@@ -45,6 +45,14 @@ class Utils {
     return new DateTime(month.year, month.month);
   }
 
+  static DateTime firstDayOfWeek(DateTime day) {
+    return day.subtract(new Duration(days: day.weekday));
+  }
+
+  static DateTime lastDayOfWeek(DateTime day) {
+    return day.add(new Duration(days: 7 - day.weekday));
+  }
+
   /// The last day of a given month
   static DateTime lastDayOfMonth(DateTime month) {
     var beginningNextMonth = (month.month < 12)
