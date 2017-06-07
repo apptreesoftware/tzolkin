@@ -178,8 +178,8 @@ class TzCalendar extends PolymerElement {
           Utils.lastDayOfWeek(_currentWeek));
       _dateRangeSink.add(dateRange);
     } else {
-      _dateRange = new DateRange(Utils.firstDayOfMonth(_currentWeek),
-          Utils.lastDayOfMonth(_currentWeek));
+      var days = Utils.daysInMonth(_currentWeek);
+      _dateRange = new DateRange(days.first, days.last);
       _dateRangeSink.add(_dateRange);
     }
   }
