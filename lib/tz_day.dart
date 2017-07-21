@@ -13,6 +13,9 @@ import 'package:polymer_elements/color.dart';
 //ignore: unused_import
 import 'package:polymer_elements/paper_progress.dart';
 
+//ignore: unused_import
+import 'package:polymer_elements/iron_flex_layout.dart';
+
 @PolymerRegister(TzDay.tag)
 class TzDay extends PolymerElement {
   static const String tag = 'tz-day';

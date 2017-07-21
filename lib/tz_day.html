@@ -6,6 +6,8 @@
             cursor: pointer;
             --tz-progress-color: var(--tz-primary-color);
             --tz-dot-color: rgba(0, 0, 0, 0.0);
+            @apply(--layout-vertical);
+            @apply(--layout-justified);
         }
 
         :host:focus {
@@ -15,7 +17,6 @@
         .label {
             padding-top: 3px;
             padding-left: 3px;
-            padding-bottom: 25px;
         }
 
         paper-progress {
