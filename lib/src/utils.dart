@@ -67,9 +67,15 @@ class Utils {
   /// [end] exclusive
   static Iterable<DateTime> daysInRange(DateTime start, DateTime end) sync* {
     var i = start;
+    var offset = start.timeZoneOffset;
     while (i.isBefore(end)) {
       yield i;
       i = i.add(new Duration(days: 1));
+      var timeZoneDiff = i.timeZoneOffset - offset;
+      if (timeZoneDiff.inSeconds != 0) {
+        offset = i.timeZoneOffset;
+        i = i.subtract(new Duration(seconds: timeZoneDiff.inSeconds));
+      }
     }
   }
 

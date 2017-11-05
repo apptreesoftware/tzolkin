@@ -19,6 +19,18 @@ void main() {
       expect(days, hasLength(35));
     });
 
+    test('daysInMonthWithTimeChangeFallBack', () {
+      var date = new DateTime(2017, 11);
+      var days = Utils.daysInMonth(date);
+      expect(days, hasLength(35));
+    });
+
+    test('daysInMonthWithTimeChangeSpringForward', () {
+      var date = new DateTime(2018, 4);
+      var days = Utils.daysInMonth(date);
+      expect(days, hasLength(42));
+    });
+
     test('isSameWeek', () {
       expect(
           Utils.isSameWeek(new DateTime(2017, 3, 4), new DateTime(2017, 3, 5)),
