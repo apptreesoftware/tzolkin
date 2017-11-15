@@ -15,12 +15,14 @@
         }
 
         .day-container {
-            height: 100%;
+            @apply(--layout-flex);
+            @apply(--layout-vertical);
         }
 
         .label {
-            padding-top: 3px;
-            padding-left: 3px;
+            @apply(--layout-flex);
+            margin-top: 3px;
+            margin-left: 3px;
         }
 
         paper-progress {
