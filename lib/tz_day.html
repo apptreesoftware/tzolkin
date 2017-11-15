@@ -14,6 +14,10 @@
             outline: none;
         }
 
+        .day-container {
+            height: 100%;
+        }
+
         .label {
             padding-top: 3px;
             padding-left: 3px;
@@ -35,10 +39,12 @@
         }
     </style>
     <template>
-        <div class="label" on-tap="handleTap">[[_dateLabel]]</div>
-        <div class="dot"></div>
-        <template is="dom-if" if="[[_hasProgress]]">
-            <paper-progress value="[[_progress]]"></paper-progress>
-        </template>
+        <div class='day-container' on-tap="handleTap">
+            <div class="label" >[[_dateLabel]]</div>
+            <div class="dot"></div>
+            <template is="dom-if" if="[[_hasProgress]]">
+                <paper-progress value="[[_progress]]"></paper-progress>
+            </template>
+        </div>
     </template>
 </dom-module>
