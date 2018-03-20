@@ -6,7 +6,7 @@ import 'dart:html';
 
 import 'package:polymer/polymer.dart';
 import 'package:tzolkin/date_range.dart';
-import 'package:tzolkin/src/utils.dart';
+import 'package:date_utils/date_utils.dart';
 import 'package:tzolkin/tz_day.dart';
 import 'package:web_components/web_components.dart' show HtmlImport;
 
