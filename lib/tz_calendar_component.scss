@@ -33,7 +33,7 @@ $tz-calendar-font: Arial, sans-serif;
 }
 
 .week:not(:first-child) {
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid $border-color;
 }
 
 .day {
@@ -41,7 +41,7 @@ $tz-calendar-font: Arial, sans-serif;
 }
 
 .day:not(:first-child) {
-  border-left: 1px solid var(--border-color);
+  border-left: 1px solid $border-color;
 }
 
 .footer {

@@ -8,6 +8,8 @@ import 'package:tzolkin/date_range.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:tzolkin/tz_day_component.dart';
 
+/// A Calendar component with the ability to hide other weeks, show a progress
+/// indicator, and a dot indicator.
 @Component(
   selector: 'tz-calendar',
   templateUrl: 'tz_calendar_component.html',
