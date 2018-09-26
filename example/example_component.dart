@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
-import 'package:tzolkin/date_range.dart';
-import 'package:tzolkin/tz_calendar_component.dart';
+import 'package:tzolkin/src/models.dart';
+import 'package:tzolkin/tzolkin.dart';
 
 @Component(
   selector: 'example-component',

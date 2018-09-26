@@ -1,12 +1,10 @@
-library at_calendar;
-
 import 'dart:async';
 import 'dart:html';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:date_utils/date_utils.dart';
-import 'package:meta/meta.dart';
+import 'package:tzolkin/src/models.dart';
 
 @Component(
   selector: 'tz-day',
@@ -23,6 +21,9 @@ class TzDay {
   StreamController<Day> _onDayTappedSink = new StreamController.broadcast();
   Day _day;
   HtmlElement hostElement;
+  String dateLabel;
+  bool hasProgress;
+  int progress;
 
   TzDay(HtmlElement ref) {
     hostElement = ref;
@@ -35,10 +36,6 @@ class TzDay {
     _day = day;
     handleDayChanged(_day, oldDay);
   }
-
-  String dateLabel;
-  bool hasProgress;
-  int progress;
 
   @Output()
   Stream get onDayTapped => _onDayTappedSink.stream;
@@ -73,17 +70,4 @@ class TzDay {
   }
 }
 
-class Day {
-  final DateTime date;
-  final int progress;
-  final bool selected;
-  final String color;
-  final String dotColor;
-  Day({
-    @required this.date,
-    @required this.progress,
-    @required this.selected,
-    @required this.color,
-    @required this.dotColor,
-  });
-}
+
