@@ -24,7 +24,7 @@ import 'package:tzolkin/tz_day_component.dart';
 class TzCalendar implements OnInit {
   DateRange _dateRange;
   StreamController<DateRange> _dateRangeSink = new StreamController.broadcast();
-  StreamController<String> _daySelectedSink = new StreamController.broadcast();
+  StreamController<DateTime> _daySelectedSink = new StreamController.broadcast();
 
   void ngOnInit() {
     displayWeek(_selectedDate);
@@ -64,12 +64,13 @@ class TzCalendar implements OnInit {
     setSelectedDate(date);
   }
 
-  Stream<String> get onDaySelected => _daySelectedSink.stream;
+  @Output()
+  Stream<DateTime> get selectedDateChange => _daySelectedSink.stream;
 
   void setSelectedDate(DateTime date) {
     _selectedDate = date;
     _currentWeek = _selectedDate;
-    _daySelectedSink.add(Utils.apiDayFormat(date));
+    _daySelectedSink.add(date);
     selectedDateLabel = Utils.fullDayFormat(date);
   }
 
