@@ -1,12 +1,10 @@
-library at_calendar;
-
 import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart' hide DateRange;
-import 'package:tzolkin/date_range.dart';
 import 'package:date_utils/date_utils.dart';
-import 'package:tzolkin/tz_day_component.dart';
+import 'package:tzolkin/src/models.dart';
+import 'package:tzolkin/src/tz_day_component.dart';
 
 /// A Calendar component with the ability to hide other weeks, show a progress
 /// indicator, and a dot indicator.
@@ -22,9 +20,22 @@ import 'package:tzolkin/tz_day_component.dart';
   ],
 )
 class TzCalendar implements OnInit {
+  String title;
+  List<String> weekdays = [];
+  List<List<Day>> days = [];
+  DateTime _currentWeek;
+  DataSource _dataSource;
   DateRange _dateRange;
+  String expandIcon;
+  String selectedDateLabel;
+  DateTime _selectedDate;
+
+  @Input()
+  bool hideOtherWeeks = true;
+
   StreamController<DateRange> _dateRangeSink = new StreamController.broadcast();
-  StreamController<DateTime> _daySelectedSink = new StreamController.broadcast();
+  StreamController<DateTime> _daySelectedSink =
+      new StreamController.broadcast();
 
   void ngOnInit() {
     displayWeek(_selectedDate);
@@ -34,29 +45,10 @@ class TzCalendar implements OnInit {
   @Output()
   Stream<DateRange> get onDateRangeChanged => _dateRangeSink.stream;
 
-  String title;
-
-  List<String> weekdays = [];
-
-  List<List<Day>> days = [];
-
-  @Input()
-  bool hideOtherWeeks = true;
-
-  DateTime _currentWeek;
-  DataSource _dataSource;
-
   @Input()
   void set dataSource(DataSource dataSource) {
     _dataSource = dataSource;
   }
-
-  @Input()
-  String expandIcon;
-
-  String selectedDateLabel;
-
-  DateTime _selectedDate;
 
   DateTime get selectedDate => _selectedDate;
   @Input()
@@ -183,15 +175,4 @@ class TzCalendar implements OnInit {
       _dateRangeSink.add(_dateRange);
     }
   }
-}
-
-abstract class DataSource {
-  DateConfiguration configurationForDay(DateTime day);
-}
-
-class DateConfiguration {
-  final int progress;
-  final String color;
-  final String dotColor;
-  DateConfiguration(this.progress, this.color, this.dotColor);
 }
