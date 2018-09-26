@@ -1,81 +1,78 @@
-@HtmlImport('tz_calendar.html')
 library at_calendar;
 
 import 'dart:async';
-import 'dart:html';
 
-import 'package:polymer/polymer.dart';
+import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart' hide DateRange;
 import 'package:tzolkin/date_range.dart';
 import 'package:date_utils/date_utils.dart';
-import 'package:tzolkin/tz_day.dart';
-import 'package:web_components/web_components.dart' show HtmlImport;
+import 'package:tzolkin/tz_day_component.dart';
 
-//ignore: unused_import
-import "package:polymer_elements/iron_flex_layout.dart";
-
-//ignore: unused_import
-import "package:polymer_elements/paper_icon_button.dart";
-
-//ignore: unused_import
-import "package:polymer_elements/iron_icons.dart";
-
-@PolymerRegister(TzCalendar.tag)
-class TzCalendar extends PolymerElement {
-  static const String tag = 'tz-calendar';
-
+@Component(
+  selector: 'tz-calendar',
+  templateUrl: 'tz_calendar_component.html',
+  styleUrls: ['tz_calendar_component.css'],
+  directives: [
+    coreDirectives,
+    TzDay,
+    MaterialButtonComponent,
+    MaterialIconComponent,
+  ],
+)
+class TzCalendar implements OnInit {
   DateRange _dateRange;
   StreamController<DateRange> _dateRangeSink = new StreamController.broadcast();
+  StreamController<String> _daySelectedSink = new StreamController.broadcast();
+
+  void ngOnInit() {
+    displayWeek(_selectedDate);
+  }
 
   DateRange get dateRange => _dateRange;
+  @Output()
   Stream<DateRange> get onDateRangeChanged => _dateRangeSink.stream;
 
-  String get title => get('_title');
-  void set title(String t) {
-    set('_title', t);
-  }
+  String title;
 
-  List<String> get weekdays => get('_weekdays');
-  void set weekdays(List<String> t) {
-    set('_weekdays', t);
-  }
+  List<String> weekdays = [];
 
-  List<List<DayProxy>> get days => get('_days');
-  void set days(List<List<DayProxy>> t) {
-    set('_days', t);
-  }
+  List<List<Day>> days = [];
 
-  @Property()
+  @Input()
   bool hideOtherWeeks = true;
 
   DateTime _currentWeek;
   DataSource _dataSource;
 
-  @property
+  @Input()
+  void set dataSource(DataSource dataSource) {
+    _dataSource = dataSource;
+  }
+
+  @Input()
   String expandIcon;
 
-  String get selectedDateLabel => get('_selectedDateLabel');
-  void set selectedDateLabel(String t) {
-    set('_selectedDateLabel', t);
-  }
+  String selectedDateLabel;
 
   DateTime _selectedDate;
 
-  factory TzCalendar() => new TzCalendar._internal();
-  factory TzCalendar._internal() => new Element.tag(TzCalendar.tag);
-  TzCalendar.created() : super.created();
-
   DateTime get selectedDate => _selectedDate;
+  @Input()
+  void set selectedDate(DateTime date) {
+    setSelectedDate(date);
+  }
+
+  Stream<String> get onDaySelected => _daySelectedSink.stream;
 
   void setSelectedDate(DateTime date) {
     _selectedDate = date;
     _currentWeek = _selectedDate;
-    fire('day-selected', detail: Utils.apiDayFormat(date));
+    _daySelectedSink.add(Utils.apiDayFormat(date));
     selectedDateLabel = Utils.fullDayFormat(date);
   }
 
-  void displayWeek(DateTime week, [DataSource source]) {
+  void displayWeek(DateTime week) {
     _currentWeek = week;
-    _dataSource = source;
     render();
   }
 
@@ -83,14 +80,14 @@ class TzCalendar extends PolymerElement {
     title = Utils.formatMonth(_currentWeek);
     weekdays = Utils.weekdays;
     days = _daysForMonth(_currentWeek, _dataSource);
-    set('expandIcon', _expandIconValue());
+    expandIcon = _expandIconValue();
   }
 
-  List<List<DayProxy>> _daysForMonth(month, DataSource source) {
+  List<List<Day>> _daysForMonth(month, DataSource source) {
     var days = Utils.daysInMonth(month);
-    List<List<DayProxy>> result = [];
+    List<List<Day>> result = [];
     // the current week;
-    List<DayProxy> week = [];
+    List<Day> week = [];
 
     for (var day in days) {
       if (!_shouldRenderDay(day)) {
@@ -98,8 +95,12 @@ class TzCalendar extends PolymerElement {
       }
 
       var config = source?.configurationForDay(day);
-      var proxy = new DayProxy(day, config?.progress ?? -1,
-          Utils.isSameDay(_selectedDate, day), config?.color, config?.dotColor);
+      var proxy = new Day(
+          date: day,
+          progress: config?.progress ?? -1,
+          selected: Utils.isSameDay(_selectedDate, day),
+          color: config?.color,
+          dotColor: config?.dotColor);
       week.add(proxy);
       if (week.length >= 7) {
         result.add(week);
@@ -127,29 +128,26 @@ class TzCalendar extends PolymerElement {
 
   String _expandIconValue() {
     if (hideOtherWeeks) {
-      return 'icons:expand-more';
+      return 'expand_more';
     } else {
-      return 'icons:expand-less';
+      return 'expand_less';
     }
   }
 
-  @reflectable
-  void handleDayTapped(CustomEvent e, DayProxy d) {
+  void handleDayTapped(Day d) {
     setSelectedDate(d.date);
     render();
   }
 
-  @reflectable
-  void handleToggleWeek(e, d) {
-    set('hideOtherWeeks', !hideOtherWeeks);
-    set('expandIcon', _expandIconValue());
+  void handleToggleWeek() {
+    hideOtherWeeks = !hideOtherWeeks;
+    expandIcon = _expandIconValue();
 
     emitRangeEvent();
     render();
   }
 
-  @reflectable
-  void handlePrevious(e, d) {
+  void handlePrevious() {
     if (hideOtherWeeks) {
       _currentWeek = Utils.previousWeek(_currentWeek);
     } else {
@@ -160,8 +158,7 @@ class TzCalendar extends PolymerElement {
     render();
   }
 
-  @reflectable
-  void handleNext(e, d) {
+  void handleNext() {
     if (hideOtherWeeks) {
       _currentWeek = Utils.nextWeek(_currentWeek);
     } else {

@@ -1,0 +1,42 @@
+$tz-primary-color: #03a9f4;
+$background-color: white;
+$tz-progress-color: $tz-primary-color;
+$tz-dot-color: rgba(0, 0, 0, 0.0);
+
+:host {
+  background-color: var(--background-color);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+:host:focus {
+  outline: none;
+}
+
+.day-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  display: flex;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+//paper-progress {
+//  width: 100%;
+//  --paper-progress-active-color: var(--tz-progress-color);
+//}
+
+.dot {
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  background-color: $tz-dot-color;
+}
