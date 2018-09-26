@@ -1,10 +1,10 @@
 $tz-primary-color: #03a9f4;
 $background-color: white;
 $tz-progress-color: $tz-primary-color;
-$tz-dot-color: rgba(0, 0, 0, 0.0);
+$tz-dot-color: grey;
 
 :host {
-  background-color: var(--background-color);
+  background-color: $background-color;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -25,11 +25,6 @@ $tz-dot-color: rgba(0, 0, 0, 0.0);
   margin-top: 3px;
   margin-left: 3px;
 }
-
-//paper-progress {
-//  width: 100%;
-//  --paper-progress-active-color: var(--tz-progress-color);
-//}
 
 .dot {
   border-radius: 50%;

@@ -1,8 +1,10 @@
 library at_calendar;
 
 import 'dart:async';
+import 'dart:html';
 
 import 'package:angular/angular.dart';
+import 'package:angular_components/angular_components.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:meta/meta.dart';
 
@@ -12,11 +14,19 @@ import 'package:meta/meta.dart';
   styleUrls: [
     'tz_day_component.css',
   ],
-  directives: [],
+  directives: [
+    coreDirectives,
+    MaterialProgressComponent,
+  ],
 )
 class TzDay {
   StreamController<Day> _onDayTappedSink = new StreamController.broadcast();
   Day _day;
+  HtmlElement hostElement;
+
+  TzDay(HtmlElement ref) {
+    hostElement = ref;
+  }
 
   Day get day => _day;
   @Input()
@@ -51,13 +61,16 @@ class TzDay {
       hasProgress = false;
     }
 
-    renderColors(v);
     renderSelected(v.selected);
   }
 
-  renderColors(Day day) {}
-
-  renderSelected(bool b) {}
+  renderSelected(bool selected) {
+    if (selected) {
+      hostElement.style.backgroundColor = "#bbdefb";
+    } else {
+      hostElement.style.backgroundColor = "white";
+    }
+  }
 }
 
 class Day {
