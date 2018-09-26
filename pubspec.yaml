@@ -1,23 +1,20 @@
 name: tzolkin
 description: A simple calendar element.
-version: 2.1.3
+version: 3.0.0
 author: John Ryan <john.p.ryan4@gmail.com>
-homepage: https://github.com/johnpryan/tzolkin
+homepage: https://github.com/apptreesoftware/tzolkin
 
 environment:
-  sdk: ">=1.8.0 <2.0.0"
+  sdk: ">=2.0.0 <3.0.0"
 
 dependencies:
-  polymer: ^1.0.0-rc.17
-  polymer_elements: ^1.0.0-rc.9
-  web_components: ^0.12.5
-  browser: ^0.10.0+2
-  date_utils: ^0.0.2
+  angular: ^5.0.0
+  angular_components: ^0.9.0
+  date_utils: ^0.1.0
+  sass_builder: ^2.1.0
+  meta: ^1.1.0
+  build_web_compilers: '>=0.3.6 <0.5.0'
+  build_runner: '>=0.8.10 <0.11.0'
 
 dev_dependencies:
-  test: '>=0.12.0 <0.13.0'
-
-transformers:
-- polymer:
-    entry_points:
-      - example/index.html
+  test: ^1.0.0

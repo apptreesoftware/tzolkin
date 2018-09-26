@@ -1,0 +1,57 @@
+$tz-primary-color: #03a9f4;
+$border-color: #d6d6d6;
+$tz-calendar-font: Arial, sans-serif;
+
+* {
+  font-family: $tz-calendar-font;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weekdays {
+  display: flex;
+  justify-content: center;
+}
+
+.weekday {
+  flex: 1;
+}
+
+.week-container {
+  border: 1px solid $border-color;
+}
+
+.week {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  height: 40px;
+}
+
+.week:not(:first-child) {
+  border-top: 1px solid var(--border-color);
+}
+
+.day {
+  flex: 1;
+}
+
+.day:not(:first-child) {
+  border-left: 1px solid var(--border-color);
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.full-date {
+  color: #bdbdbd;
+}
+

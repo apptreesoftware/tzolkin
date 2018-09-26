@@ -1,0 +1,30 @@
+<div class="title">
+    <material-button
+            icon
+            (trigger)="handlePrevious()">
+        <material-icon icon="chevron_left"></material-icon>
+    </material-button>
+    <div>{{title}}</div>
+    <material-button
+            icon
+            (trigger)="handleNext()">
+        <material-icon icon="chevron_right"></material-icon>
+    </material-button>
+</div>
+<div class="weekdays">
+    <div class="weekday" *ngFor="let weekday of weekdays">{{weekday}}</div>
+</div>
+<div class="week-container">
+    <div class="week" *ngFor="let week of days">
+        <tz-day class="day" *ngFor="let day of week" [day]="day"
+                (onDayTapped)="handleDayTapped"></tz-day>
+    </div>
+</div>
+<div class="footer">
+    <div class="full-date">{{selectedDateLabel}}</div>
+    <material-button
+            icon
+            (trigger)="handleToggleWeek()">
+        <material-icon [icon]="expandIcon"></material-icon>
+    </material-button>
+</div>
