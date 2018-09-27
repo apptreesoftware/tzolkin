@@ -25,6 +25,9 @@ class TzDay {
   bool hasProgress;
   int progress;
 
+  @ViewChild('dotElement')
+  DivElement dotElement;
+
   TzDay(HtmlElement ref) {
     hostElement = ref;
   }
@@ -58,7 +61,16 @@ class TzDay {
       hasProgress = false;
     }
 
+    renderColors(v);
     renderSelected(v.selected);
+  }
+
+  renderColors(Day v) {
+    if (day.color != null) {
+      dotElement.style.backgroundColor = day.color;
+    } else {
+      dotElement.style.backgroundColor = "#00000000";
+    }
   }
 
   renderSelected(bool selected) {

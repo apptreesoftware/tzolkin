@@ -1,5 +1,5 @@
 <div class='day-container' (click)="handleTap" #container>
     <div class="label">{{dateLabel}}</div>
-    <div class="dot"></div>
+    <div class="dot" #dotElement></div>
     <material-progress *ngIf="hasProgress" [activeProgress]="progress"></material-progress>
 </div>
