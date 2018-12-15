@@ -1,8 +1,8 @@
 name: tzolkin
 description: A simple calendar element.
-version: 2.1.3
+version: 2.1.4
 author: John Ryan <john.p.ryan4@gmail.com>
-homepage: https://github.com/johnpryan/tzolkin
+homepage: https://github.com/apptreesoftware/tzolkin
 
 environment:
   sdk: ">=1.8.0 <2.0.0"

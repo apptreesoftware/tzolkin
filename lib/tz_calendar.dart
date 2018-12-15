@@ -155,7 +155,7 @@ class TzCalendar extends PolymerElement {
     } else {
       _currentWeek = Utils.previousMonth(_currentWeek);
     }
-
+    setSelectedDate(_currentWeek);
     emitRangeEvent();
     render();
   }
@@ -167,7 +167,7 @@ class TzCalendar extends PolymerElement {
     } else {
       _currentWeek = Utils.nextMonth(_currentWeek);
     }
-
+    setSelectedDate(_currentWeek);
     emitRangeEvent();
     render();
   }
