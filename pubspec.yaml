@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   angular: ^5.1.0
-  angular_components: ^0.10.1
+  angular_components: '>=0.10.0 <1.0.0'
   date_utils: ^0.1.0
   sass_builder: ^2.1.0
   meta: ^1.1.0
