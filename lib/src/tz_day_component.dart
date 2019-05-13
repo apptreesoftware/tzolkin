@@ -5,6 +5,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:date_utils/date_utils.dart';
 import 'package:tzolkin/src/models.dart';
+import 'package:tzolkin/src/tz_progress_component.dart';
 
 @Component(
   selector: 'tz-day',
@@ -14,7 +15,7 @@ import 'package:tzolkin/src/models.dart';
   ],
   directives: [
     coreDirectives,
-    MaterialProgressComponent,
+    TzProgressComponent,
   ],
 )
 class TzDay {
@@ -33,6 +34,7 @@ class TzDay {
   }
 
   Day get day => _day;
+
   @Input()
   void set day(Day day) {
     var oldDay = _day;
@@ -66,8 +68,8 @@ class TzDay {
   }
 
   renderColors(Day v) {
-    if (day.color != null) {
-      dotElement.style.backgroundColor = day.color;
+    if (day.dotColor != null) {
+      dotElement.style.backgroundColor = day.dotColor;
     } else {
       dotElement.style.backgroundColor = "#00000000";
     }
@@ -81,5 +83,3 @@ class TzDay {
     }
   }
 }
-
-

@@ -1,5 +1,17 @@
-<div class='day-container' (click)="handleTap" #container>
-    <div class="label">{{dateLabel}}</div>
-    <div class="dot" #dotElement></div>
-    <material-progress *ngIf="hasProgress" [activeProgress]="progress"></material-progress>
+<div
+        class='day-container'
+        (click)='handleTap'
+        #container
+>
+    <div class='label'>{{dateLabel}}</div>
+    <div
+            class='dot'
+            #dotElement
+    ></div>
+    <tz-progress
+            #progressElement
+            *ngIf='hasProgress'
+            [activeProgress]='progress'
+            [backgroundColor]='day.color'
+    ></tz-progress>
 </div>
