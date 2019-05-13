@@ -31,13 +31,12 @@ class TzProgressComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   set backgroundColor(String color) {
-    print(color);
     _backgroundColor = color;
   }
 
   String _backgroundColor;
 
-  String get backgroundColor => _backgroundColor;
+  String get backgroundColor => _backgroundColor ?? "transparent";
 
   /// The current progress value.
   @Input()
